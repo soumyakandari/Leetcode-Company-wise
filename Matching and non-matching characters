@@ -1,0 +1,30 @@
+Given a pair of non-empty strings str1 and str2, the task is to count the number of matching characters in these strings.
+Consider the single count for the character which have duplicates in the strings.
+Examples: 
+
+Input: str1 = “abcdef”, str2 = “defghia” 
+Output: 4 
+Matching characters are: a, d, e, f
+Input: str1 = “aabcddekll12”, str2 = “bb22ll@55k” 
+Output: 5 
+Matching characters are: b, 1, 2, @, k 
+
+indexof()
+T.C-O(N)
+S.C-O(1)
+
+class solution{
+   public static int countmatching(String str1 ,String str2)
+   {    int count=0;
+          for(int i=0;i<str.length();i++)
+          { 
+             //find if this character is present in str2 or not
+             if(str2.indexOf(str1.charAt(i))>=0)
+                c++;
+          }
+        return c;
+      }
+ }
+   
+   
+     
