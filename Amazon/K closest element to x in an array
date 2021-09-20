@@ -17,65 +17,28 @@ Second closest element to 35 is 30.
 Third closest element to 35 is 42.
 And fourth closest element to 35 is 45.
 
-better force USING MAXHEAP,
-T.C-O(2NLOGK)
-S.C-O(k)
-class Solution {
-    class point{
-        int x1;
-        int diff;
-        public point(int x1,int diff)
-        {
-            this.x1=x1;
-            this.diff=diff;
-        }
-    }
-    int[] printKClosest(int[] arr, int n, int k, int x) {
-             //using priority queue maxheap
-             //min difference with given element x
-             PriorityQueue<point>maxheap= new PriorityQueue<>((a,b)->b.diff-a.diff);
-             //storing val in point for first k elements
-             for(int i=0;i<k;i++)
-             {
-                 if(arr[i]!=x)
-                 {
-                     int x1=arr[i];
-                     int diff= Math.abs(x1-x); //diff between the given element and arr[i]
-                     point p= new point(x1,diff);
-                     maxheap.add(p);
-                 }
-                 
-             }
-             //checking for other 
-             for(int i=k;i<n;i++)
-             {
-                 if(arr[i]!=x)
-                 {
-                     int x1=arr[i];
-                     int diff= Math.abs(x1-x); //diff between the given element and arr[i]
-                     
-                     if(diff<maxheap.peek().diff)
-                     { maxheap.poll();
-                       maxheap.add(new point(x1,diff));
-                     }
-                 }
-                 
-             }
-             //array to return the k closest val
-             int res[]= new int[k];
-             int i=0;
-             while(!maxheap.isEmpty())
-             {
-                 point p= maxheap.poll(); //storing the heap value in an object
-                 res[i]=p.x1;
-                 i++;
-             }
-             Arrays.sort(res);
-        return res; 
-        
-    }
-}
 
+   
 #OPTIMAL FORCE USING BINARY SEARCH
 T.C-O(LOGN+K)
 S.C-O(N)
+
+ class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        int lo = 0;
+		int hi = arr.length - 1;
+		while (hi - lo >= k) {
+			if (Math.abs(arr[lo] - x) > Math.abs(arr[hi] - x)) {
+				lo++;
+			} else {
+				hi--;
+			}
+		}
+		List<Integer> result = new ArrayList<>(k);
+		for (int i = lo; i <= hi; i++) {
+			result.add(arr[i]);
+		}
+		return result;
+    }
+
+}
