@@ -5,3 +5,37 @@ Return the single element that appears only once.
 Your solution must run in O(log n) time and O(1) space.
 Input: nums = [1,1,2,3,3,4,4,8,8]
 Output: 2
+
+BETTER FORCE= HASHING 
+T.C- O(N)
+S.C-O(1)
+
+#OPTIMAL FORCE
+USING BINARY SEARCH
+T.C- O(LOGN)
+S.C-O(1)
+
+ALGO-
+1. every element at even index will be equal to its next element
+2. similarliy , odd index element will be equal to its prev elemet
+3. if not then sequenece is disturbed before the element index, so now high-->mid
+
+JAVA CODE-
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        int n=nums.length;
+        int low=0,high=n-1;
+        int mid=0;
+            while(low<high)
+            {
+                mid=low+(high-low)/2;
+                //if even/odd index element duplicate available--> sequence perfect till now
+                if((mid%2==0 && nums[mid]==nums[mid+1])||(mid%2==1 && nums[mid]==nums[mid-1]))
+                    low=mid+1;
+                else
+                    high=mid;
+                
+            }
+        return nums[low];
+    }
+}
