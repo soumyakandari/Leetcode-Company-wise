@@ -14,3 +14,23 @@ T.C-O(LOGN)
 S.C-O(1)
 
 JAVA CODE:
+public class Solution extends GuessGame {
+    public int guessNumber(int n) {
+      int lo=1,high=n;
+        while(lo<=high)
+        {
+            int mid= lo+(high-lo)/2;
+            if(guess(mid)==0)
+                return mid;
+        if(guess(mid)<0)
+             high=mid-1;
+        else
+            lo=mid+1;
+            
+            
+            
+            
+        }
+        return -1;
+    }
+}
