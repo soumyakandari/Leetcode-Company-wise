@@ -1,0 +1,43 @@
+Given an array A of n positive numbers. The task is to find the first Equilibium Point in the array. 
+Equilibrium Point in an array is a position such that the sum of elements before it is equal to the sum of elements after it.
+
+Example 1:
+Input: 
+n = 5 
+A[] = {1,3,5,2,2} 
+Output: 3 
+Explanation: For second test case 
+equilibrium point is at position 3 
+as elements before it (1+3) = 
+elements after it (2+2). 
+
+ALGO-
+1. CALculate sum of whole array
+2. initialize left sum =0;
+3. if left= sum-arr[i] ---> point found
+4. otherwise, update the left sum as left+=arr[i];
+5. sum-=arr[i];
+
+ public static int equilibriumPoint(long arr[], int n) {
+
+        if(n==1)
+           return 1;
+        long left=0, sum=0;
+        for(int i=0;i<n;i++)
+        {
+          sum+=arr[i];
+        }
+        for(int i=0;i<n;i++)
+        {
+            if(left== (sum-arr[i]))
+               return i+1;
+               
+            //update val
+            left+=arr[i];
+            sum-=arr[i];
+        }
+        return -1;
+        
+        
+    }
+}
