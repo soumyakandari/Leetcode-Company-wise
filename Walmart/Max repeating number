@@ -1,1 +1,41 @@
+Given an array Arr of size N, the array contains numbers in range from 0 to K-1 where K is a positive integer and K <= N.
+Find the maximum repeating number in this array. If there are two or more maximum repeating numbers return the element having least value
 
+N = 4, K = 3
+Arr[] = {2, 2, 1, 2}
+Output: 2
+Explanation: 2 is the most frequent
+element.
+
+#USING HASHMAP 
+T.C-O(n)
+S.C-O(N)
+
+ALGO-
+1. count all the freq of each element using hashmap
+2. find the max freq 
+3. return the first element with max freq
+
+JAVA CODE-
+class Solution {
+    int maxRepeating(int[] arr, int n, int k) {
+        HashMap<Integer,Integer> m= new HashMap<>();
+        for(int i:arr)
+         m.put(i,m.getOrDefault(i,0)+1);
+        
+        int max=0;
+        for(Map.Entry<Integer,Integer>e:m.entrySet())
+           {
+               
+               max=Math.max(max,e.getValue());
+               
+           }
+            for(Map.Entry<Integer,Integer>e1:m.entrySet())
+           {
+               if(e1.getValue()==max)
+                 return e1.getKey();
+               
+           }
+           return 0;
+    }
+}
