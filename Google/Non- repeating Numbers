@@ -1,0 +1,48 @@
+Given an array A containing 2*N+2 positive numbers, out of which 2*N numbers exist in pairs whereas the other two number occur exactly once and are distinct.
+Find the other two numbers.
+
+Input: 
+N = 2
+arr[] = {1, 2, 3, 2, 1, 4}
+Output:
+3 4 
+Explanation:
+3 and 4 occur exactly once.
+
+#USING HASHMAP
+T.C -O(n)
+S.C-O(N)
+
+JAVA CODE-
+class Solution
+{
+    public int[] singleNumber(int[] nums)
+    {
+        // Hashmap
+        int res[]= new int[2];
+        HashMap<Integer,Integer> map= new HashMap<>();
+        for(int i:nums)
+          map.put(i,map.getOrDefault(i,0)+1);
+          
+         int index=0;
+        //find the keys whose value is 1 
+        for(Map.Entry<Integer,Integer> e: map.entrySet())
+          {
+              if(e.getValue()==1)
+                 {
+                     res[index]=e.getKey();
+                     index++;
+                 }
+          }
+          //sort
+           if(res[0]>res[1])
+             {
+                 //swap
+                 int temp= res[0];
+                 res[0]=res[1];
+                 res[1]=temp;
+                 
+             }
+          return res;
+    }
+}
