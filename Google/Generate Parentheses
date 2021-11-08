@@ -9,3 +9,57 @@ Output:
 ()()()
 
 #USING RECURSION 
+ALGO-
+1. close and open brackets =n;
+2. now we will always have option to call opening bracket
+3. but we will use close bracket only when there are less open bracket than close
+4. edge case- when both are 0 --> add string into res
+
+Expected Time Complexity: O(2N * N).
+Expected Auxiliary Space: O(2*N*X), X = Number of valid Parenthesis.
+
+JAVA CODE-
+class Solution {
+    
+    public List<String> AllParenthesis(int n) 
+    {
+        // VARIABLE FOR OPEN AND CLOSE 
+        int open = n;
+        int close= n;
+        List<String> res= new ArrayList<>();
+        String op="";  //blank at start
+        
+        //recursion call for valid parenthesis
+        solve(open,close,op,res);
+        return res;
+        
+    }
+    public void solve(int open , int close, String op ,List<String> res)
+       {
+           //edge case stop the recursion call if there are no brackets left
+           if(open==0 &&close==0)
+             {
+                 res.add(op);
+                 return ;
+             }
+        //choice for open bracket always
+        if(open!=0)
+           {
+               String valid=op;
+               //update this new string and add opening bracket
+               valid= valid+"(";
+               solve(open-1,close,valid,res);
+           }
+           
+         //condition for close bracket only if there are more closing brackets than opening
+         if(close>open)
+            {
+                String valid2=op;
+                //add close bracket
+                valid2=valid2+")";
+                solve(open,close-1,valid2,res);
+                
+                
+            }
+       }
+}
