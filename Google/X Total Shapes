@@ -1,0 +1,70 @@
+Given  a grid of n*m consisting of O's and X's. The task is to find the number of 'X' total shapes.
+Note: 'X' shape consists of one or more adjacent X's (diagonals not included).
+ 
+
+Example 1:
+Input: grid = {{X,O,X},{O,X,O},{X,X,X}}
+Output: 3
+Explanation: 
+The grid is-
+X O X
+O X O
+X X X
+So, X with same colour are adjacent to each 
+other vertically for horizontally (diagonals 
+not included). So, there are 3 different groups 
+in the given grid.
+
+#USING DP AND NO OF ISLANDS ALGO
+
+T.C -O(N*M)
+S.C -O(N*M)
+
+JAVA CODE-
+class Solution
+{
+    //Function to find the number of 'X' total shapes.
+    public int xShape(char[][] grid)
+    {  //similar to islands
+        int count=0;
+        int n= grid.length;
+        int m= grid[0].length;
+        if(n==0)
+          return 0;
+        
+        //check for those elements ="X"
+        for(int i=0;i<n;i++)
+        {
+             for(int j=0;j<m;j++)
+               {
+                   if(grid[i][j]=='X')
+                      {
+                         dp(grid,i,j);
+                         count++;
+                        
+                      }
+               }
+        }
+        return count;
+        
+    }
+    
+    //dp recursion
+     public void dp(char[][]grid,int i,int j)
+       {   int n= grid.length;
+        int m= grid[0].length;
+           //base condition 
+           //move out of grid
+           if(i<0 || j<0 || i>=n ||j>=m || grid[i][j]== 'O')
+              return ;
+             
+             //update the visited index to O
+             grid[i][j]='O';
+             //four directions except the diagonal
+             dp(grid,i+1,j);
+             dp(grid,i-1,j);
+             dp(grid,i,j-1);
+             dp(grid,i,j+1);
+             
+       }
+}
