@@ -19,3 +19,28 @@ T.C- O(1)
 S.C-O(N)
 
 JAVA CODE-
+class Geeks {
+    // Function to find largest number with minimum frequency
+    public static int LargButMinFreq(int arr[], int n) {
+        //USING HASHMAP
+        HashMap<Integer,Integer> count= new HashMap<>();
+        //put freq of each element
+        int maxelement=0;
+        
+        for(int i:arr)
+          count.put(i,count.getOrDefault(i,0)+1);
+         
+        //find the largest element with freq=1
+         for(Map.Entry<Integer,Integer> e:count.entrySet())
+             {
+                 //find minimum freq
+                 if(e.getValue()==1)
+                   {
+                     if(e.getKey()>maxelement)
+                     maxelement= e.getKey();
+                   }
+             }
+        return maxelement;     
+         
+    }
+}
