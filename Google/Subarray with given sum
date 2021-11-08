@@ -1,0 +1,53 @@
+Given an unsorted array A of size N that contains only non-negative integers, find a continuous sub-array which adds to a given number S.
+Example 1:
+
+Input:
+N = 5, S = 12
+A[] = {1,2,3,7,5}
+Output: 2 4
+Explanation: The sum of elements 
+from 2nd position to 4th position 
+is 12.
+
+
+#using loop and 1 pointer to mark the starting of subarray
+
+T.C -O(N)
+S.C- O(1)
+
+JAVA CODE-
+class Solution
+{
+    //Function to find a continuous sub-array which adds up to a given number.
+    static ArrayList<Integer> subarraySum(int[] arr, int n, int s) 
+    {  
+          ArrayList<Integer> res= new ArrayList<>();
+        int sum=0;
+       int c=0;
+        
+        int start=0;
+        for(int i=0;i<n;i++)
+        {
+            if(sum<s)
+               sum=sum+arr[i];
+             while(sum>s)
+               {
+                   sum=sum-arr[start];
+                   start++;
+               }
+            if(sum==s) 
+               {     c=1;//if subarray exist
+                   res.add(start+1);
+                   res.add(i+1);
+                   break;
+               }
+            
+           
+           
+        }
+        if(c==0)
+          res.add(-1);
+        return res;
+        
+    }
+}
