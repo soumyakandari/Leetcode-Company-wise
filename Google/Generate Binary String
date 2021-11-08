@@ -9,3 +9,64 @@ can be formed, they are 10000101, 10001101,
 10100101, 10101101, 11000101, 11001101, 
 11100101 and 11101101.
 
+
+#USING RECURSION CALLS
+ALGO-
+1. we have two option to replace ? with--> 0 or 1
+2. call recursion one --> replace with 0 , other replace with 1
+3. VERY IMPORTANT ---> after each recursion call make sure to backtrack the value of index to ? again
+4. for the otherchoice call , we will again require the ? at the same index
+5. edge case -- if index reaches last ---> add string to res
+
+T.C -O(2^N)
+Expected Space complexity: O(n*2n)
+
+JAVA CODE-
+class Solution {
+    public List<String>generate_binary_string(String s)
+    {
+        // 2 CHOICES TO REPLACE ? WITH--> 1 OR 0
+        //RECURSION
+        List<String> res= new ArrayList<>();
+        //index variable 
+        int index=0;
+        char[] string =s.toCharArray();
+         binary(string,index,res);
+         
+         return res;
+         
+     }
+     
+    //recursion code
+    public void binary( char[] string,int index, List<String> res)
+    {
+        //edge case --> when we reach the last index
+        if(index==string.length)
+           {
+               //convert to string
+               String s1= String.valueOf(string);
+               res.add(s1);
+               return;
+               
+           }
+         //add either 0 or 1 when the index value is '?'
+         if(string[index]=='?')
+           {
+               //add 0
+               string[index]='0';
+               //recurison call
+                binary(string,index+1,res);
+                
+            //add 1
+               string[index]='1';
+               //recurison call
+                binary(string,index+1,res);
+                
+               --> //need to backtrack  VERY IMPORTANT<----
+                string[index]='?';
+           }
+           //if the index value is not '?', move the index forward
+           else 
+              binary(string,index+1,res);
+    }
+}
