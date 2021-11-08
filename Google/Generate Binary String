@@ -1,0 +1,11 @@
+Given a string containing of ‘0’, ‘1’ and ‘?’ - a wildcard character,
+generate all distinct binary strings that can be formed by replacing each wildcard character by either ‘0’ or ‘1’.
+Input: 1??0?101
+Output: 10000101 10001101 10100101 10101101 
+11000101 11001101 11100101 11101101
+Explanation:
+There will be 8 such possible strings that 
+can be formed, they are 10000101, 10001101, 
+10100101, 10101101, 11000101, 11001101, 
+11100101 and 11101101.
+
