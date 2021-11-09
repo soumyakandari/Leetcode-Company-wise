@@ -3,4 +3,51 @@ LEETCODE PREMIUM = 1055
 T.C - O(N*M)
 S.C- O(m)
 
+input- source : "abc"
+       target : "abcbc"
+output :2
+
+ALgo-
+1. keep a remaining string initialise to target at first
+2. and checkthe sequence that matches to the rem and source
+3. update the rem after each subsqeuence is found
+4. if at any point the subsequence is 0 i.e there exist a character that is not there in source
+5. return -1
+
 JAVA CODE-
+class solution{
+  public int shortestway(String source , String target)
+    {
+      int numsub=0; //no .of subsquences
+      String rem= target; //at first
+      while(rem.length()>0) //while there is still subsequence to match/create
+        { 
+           String subseq= "" ;//subsequence to match with rem
+           int i=0;
+           int j=0; //2 pointers for rem and source index
+           while(i<source.length()  && j<rem.length()) {
+                //check if both are equal
+                
+                if(source.charAt(i) ==rem.charAt(j))
+                   {
+                      //add to subseq
+                      subseq=subseq+rem.charAt(j);
+                      j++; //increement j pointer
+                      
+                    }
+              i++; 
+              }
+           //count the subsequences
+           numsub++;
+             //if there exist null subseq. but rem is still left that means there is a diff character in target than source
+             if(subseq.length()==0)
+                return -1;
+                
+             //update the rem
+             rem= rem.substring(subseq.length());
+         }
+      return numsub;
+     }
+   }
+                
+            
