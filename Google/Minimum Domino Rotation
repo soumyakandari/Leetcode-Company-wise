@@ -75,3 +75,12 @@ class Solution {
     
     }
 }
+
+
+#USING THE POSSIBLE CASES
+
+T.C - O(N)
+S.C-O(1)
+
+JAVA CODE-
+
