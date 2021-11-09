@@ -1,1 +1,39 @@
+Given a string and a string dictionary, find the longest string in the dictionary that can be formed by deleting some characters of the given string.
+If there are more than one possible results, return the longest word with the smallest lexicographical order. If there is no possible result, return the empty string.
+Input: d = {"ale", "apple", "monkey", "plea"}
+       S = "abpcplea"
+Output: "apple" 
+Explanation: After deleting "b", "c"
+"a" S became "apple" which is present
+in d.
 
+#USING TWO POINTER 
+T.C -O(N*X)
+S.C - O(X)
+
+ALGO -
+1. sort the arraylist in ascending order
+2. compare both the target and arraylist string index by index
+3. at last if the whole string exist in target , update res
+4. at last of the iteration we will get the longest string from target 
+
+JAVA CODE- 
+Class Solution {
+    static String findLongestWord(String S, List<String> d) {
+         Collections.sort(d); String res="";
+       for(String s: d){
+           int i=0,j=0; int n1=S.length(), n2=s.length();
+           if(n2>n1) continue;
+           while(i<n1 && j<n2 ){
+               if(S.charAt(i) == s.charAt(j) ){
+                   j++;
+               }
+               i++;
+           }
+           if(j==n2 && res.length()<s.length() ){
+               res=s;
+           }
+       }
+       return res;
+   }
+}
