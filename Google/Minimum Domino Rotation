@@ -1,0 +1,77 @@
+In a row of dominoes, tops[i] and bottoms[i] represent the top and bottom halves of the ith domino. (A domino is a tile with two numbers from 1 to 6 - one on each half of the tile.)
+
+We may rotate the ith domino, so that tops[i] and bottoms[i] swap values.
+
+Return the minimum number of rotations so that all the values in tops are the same, or all the values in bottoms are the same.
+
+If it cannot be done, return -1.
+
+ Input: tops = [2,1,2,4,2,2], bottoms = [5,2,6,2,3,2]
+Output: 2
+Explanation: 
+The first figure represents the dominoes as given by tops and bottoms: before we do any rotations.
+If we rotate the second and fourth dominoes, we can make every value in the top row equal to 2, as indicated by the second figure.
+
+#USING HASHMAP 
+
+T.C- O(N)+O(N)+O(N)
+S.C- O(N)
+
+JAVA CODE- 
+class Solution {
+    public int minDominoRotations(int[] tops, int[] bottoms) {
+        int swap=0;
+        int index=0;
+        int max1=0,max2=0;
+        int e1=0,e2=0;
+        //most frequent numbers
+        HashMap<Integer,Integer> topfreq= new HashMap<>();
+        for(int i: tops)
+              topfreq.put(i,topfreq.getOrDefault(i,0)+1);
+        //for bottoms
+         HashMap<Integer,Integer> bottomfreq= new HashMap<>();
+        for(int i: bottoms)
+              bottomfreq.put(i,bottomfreq.getOrDefault(i,0)+1);
+        
+        //check maximum value
+        for(Map.Entry<Integer,Integer> e: topfreq.entrySet())
+        {
+            if(e.getValue()>max1)
+                { max1=e.getValue();
+                     e1=e.getKey();
+                   }
+        }
+         
+        for(Map.Entry<Integer,Integer> e: bottomfreq.entrySet())
+        {
+            if(e.getValue()>max2)
+            { max2=e.getValue();
+               e2=e.getKey();
+            }
+        } 
+        
+        //check swaps
+        if(max1>max2)
+              swap=  findswap(tops,bottoms,e1);
+        else
+             swap= findswap(bottoms,tops,e2);
+        
+        return swap;
+    }
+          
+    public int findswap(int[] a,int []b,int num)
+    {
+        int c=0;
+        for(int i=0;i<a.length;i++)
+        {
+            if(a[i]!=num && b[i]==num) 
+               c++;
+            else if(a[i]!=num && b[i]!=num) 
+                 return -1;
+            
+            
+        }
+        return c;
+    
+    }
+}
