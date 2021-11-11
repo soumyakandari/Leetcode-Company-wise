@@ -5,3 +5,42 @@ Input: emails = ["test.email+alex@leetcode.com","test.e.mail+bob.cathy@leetcode.
 Output: 2
 Explanation: "testemail@leetcode.com" and "testemail@lee.tcode.com" actually receive mails.
 
+
+Algo -
+1. creat two string one for local , one for rest
+2. rest will have the email address after the @ , and local before that
+3. need to edit the local address, we can ignore the address after +
+4. and after that replace all the . by ""
+5. add the complete add = local+rest 
+6. add this unique address to the hashset
+7. return size of hashset --> unique emails
+
+T.C -O(N)
+S.C -O(N)
+
+JAVA CODE -
+class solution{
+   public int numUniqueEmails(String[] emails) {
+        //create a hashset for unique address
+        HashSet<String> seen = new HashSet<>();
+        for(String email :emails)
+             {
+               //separate local and rest 
+               int l= email.indexOf("@");
+               String local = email.substring(0,l);
+               String rest = email.substring(l); 
+               //for ignoring the "+"
+               if(local.contains("+")
+                  {
+                     //modify the string 
+                     local= local.substring(0,local.indexOf('+"));
+                   }
+              //replace all the . 
+               local.replaceAll('\\.' , "");
+               seen.add(local+rest);  //add to the set
+             }
+           return seen.size();
+           
+           }
+         }
+                   
