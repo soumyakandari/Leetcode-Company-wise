@@ -1,0 +1,88 @@
+Given an m x n matrix board containing 'X' and 'O', capture all regions that are 4-directionally surrounded by 'X'.
+
+A region is captured by flipping all 'O's into 'X's in that surrounded region.
+
+#USING FLOOD FILL ALGO
+ DFS CALLS
+  T.C- O(N*M)
+  S.C -O(N*m)
+  
+  ALGO -
+  1. replace all the O with -
+  2. now perform flood fill on the 4 edges of the matrix  with match == '-' and color  = 'O'
+  3. replace all the remaining '-' with X's 
+  
+  reverse appraoch
+  
+  
+  JAVA CODE-
+  class Solution{
+    static char[][] fill(int n, int m, char a[][])
+    {
+        // similar to flood fill
+         //color all the 0 to 1
+        //call floodfill
+        for(int i=0;i<n;i++)
+         {
+             for(int j=0;j<m;j++)
+               if(a[i][j]=='O')
+                   a[i][j]='A';
+         }
+        //CALL FOR FLOOD FILL for all edges
+        char match='A';
+        char color ='O' ; //reverse approach
+        for(int j=0;j<m;j++)  //top edge
+          {            //flood call for edges
+                    if(a[0][j]==match)
+                       dfs(a,0,j,match,color);
+            
+          }
+          //bottom row
+          for(int j=0;j<m;j++)  //top edge
+          {            //flood call for edges
+                    if(a[n-1][j]==match)
+                       dfs(a,n-1,j,match,color);
+            
+          }
+          for(int i=0;i<n;i++)  //left edge
+          {            //flood call for edges
+                    if(a[i][0]==match)
+                       dfs(a,i,0,match,color);
+            
+          }
+           for(int i=0;i<n;i++)  //right edge
+          {            //flood call for edges
+                    if(a[i][m-1]==match)
+                       dfs(a,i,m-1,match,color);
+            
+          }
+         //step 3- replace all 'A' with 'X'
+         for(int i=0;i<n;i++)
+         {
+             for(int j=0;j<m;j++)
+               if(a[i][j]=='A')
+                   a[i][j]='X';
+         }
+         
+         return a;
+        
+    }
+    static void dfs(char[][]a, int i,int j,char match, char color)
+       {
+           if(i<0 || j<0 || i>a.length-1 || j>a[0].length-1 || a[i][j] !=match)
+               return ;
+            
+            //if matches
+            if(a[i][j]==match)
+               {
+                   a[i][j]=color;
+                   //dfs calls
+                   dfs(a,i+1,j,match,color);
+                    dfs(a,i-1,j,match,color);
+                     dfs(a,i,j-1,match,color);
+                      dfs(a,i,j+1,match,color);
+                   
+               }
+       }
+    
+}
