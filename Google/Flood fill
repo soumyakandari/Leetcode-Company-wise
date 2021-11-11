@@ -1,0 +1,51 @@
+An image is represented by an m x n integer grid image where image[i][j] represents the pixel value of the image.
+
+You are also given three integers sr, sc, and newColor. You should perform a flood fill on the image starting from the pixel image[sr][sc].
+
+To perform a flood fill, consider the starting pixel, plus any pixels connected 4-directionally to the starting pixel of the same color as the starting pixel, plus any pixels connected 4-directionally to those pixels (also with the same color), and so on. Replace the color of all of the aforementioned pixels with newColor.
+
+Return the modified image after performing the flood fill.
+
+ Input: image = [[1,1,1],[1,1,0],[1,0,1]], sr = 1, sc = 1, newColor = 2
+Output: [[2,2,2],[2,2,0],[2,0,1]]
+
+#USING DFS CALLS
+
+ALGO- 
+1. CHECKING if the color to fill exist in the 4 direction 
+2. if it does, fill the color// call for dfs
+
+T.C- O(N*M)
+S.C-O(1)  //AUXILARY STACK -O(N *M)
+
+JAVA CODE-
+class Solution {
+    public int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
+         int match= image[sr][sc];
+        if(match!=newColor) //then only we will fill the color
+            dfs(image,sr,sc,match, newColor);
+        return image;
+    }
+       public void dfs(int[][]image, int r, int c ,int match,int color) 
+       {
+           if(r<0 || c<0 || r>image.length-1 || c>image[0].length-1 || image[r][c]!=match)
+                 return ;
+           
+           //if it matches the color to be filled 
+           if(image[r][c]==match)
+           {
+               //color the element
+                image[r][c]=color;
+               //dfs calls
+               dfs(image, r+1,c,match,color);
+               dfs(image, r-1,c,match,color);
+               dfs(image, r,c+1,match,color);
+               dfs(image, r,c-1,match,color);
+               
+           }
+                
+           
+           
+       }
+}
+
