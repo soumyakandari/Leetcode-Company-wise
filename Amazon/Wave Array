@@ -9,3 +9,21 @@ Output: 2 1 4 3 5
 Explanation: Array elements after 
 sorting it in wave form are 
 2 1 4 3 5.
+
+public static void convertToWave(int arr[], int n){
+        
+        // Your code here
+        for(int i=1;i<n;i=i+2)
+        {
+            swap(i,i-1,arr);
+            
+        }
+        
+    }
+    public static void swap(int i,int j,int[]arr)
+    {
+        int t=arr[i];
+        arr[i]=arr[j];
+        arr[j]=t;
+    }
+}
