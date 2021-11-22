@@ -9,3 +9,29 @@ Output: 2 4 5
 Explanation: In the given linked list 
 2 ->2 -> 4-> 5, only 2 occurs more 
 than 1 time.
+
+T.C -O(N)
+S.C-O(1)
+
+JAVA CODE-
+class GfG
+{
+    //Function to remove duplicates from sorted linked list.
+    Node removeDuplicates(Node head)
+    {
+	// Your code here
+	Node dummy=head;
+	while(head.next!=null){
+	      int temp=head.data;
+	      if(head.next.data==temp)
+	      {
+	          //link to next to next 
+	          head.next=head.next.next;
+	      }
+	      else
+	      head= head.next;
+	      
+	}
+	return dummy;
+    }
+}
