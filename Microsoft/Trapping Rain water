@@ -1,1 +1,53 @@
+Given an array arr[] of N non-negative integers representing the height of blocks. If width of each block is 1, compute how much water can be trapped between the blocks during the rainy season. 
+ Input:
+N = 6
+arr[] = {3,0,0,2,0,4}
+Output:
+10
+Explanation: 
+#USING TWO POINTER 
+T.C-O(N)
+S.C-O(N)
+
+
+JAVA CODE-
+class Solution{
+    
+    // arr: input array
+    // n: size of array
+    // Function to find the trapped water between the blocks.
+    static long trappingWater(int arr[], int n) { 
+        // two pointer
+        int left=0,right=n-1;
+        long res=0,leftmax=0,rightmax=0;
+        
+        //condition 1
+        while(left<right)
+    {
+        if(arr[left]<=arr[right])
+        {
+            //check for leftmax
+            if(arr[left]>=leftmax)
+                leftmax= arr[left];
+            else 
+                res += leftmax-arr[left]; //calculate res
+            
+           left++;
+            
+        }
+        else
+        {
+            if(arr[right]>=rightmax)
+                rightmax= arr[right];
+            else 
+                res +=rightmax-arr[right]; //calculate res
+            
+           right--;
+    
+        }
+    }
+      return res;
+    } 
+}
+
 
