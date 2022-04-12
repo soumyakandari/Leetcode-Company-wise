@@ -1,0 +1,47 @@
+Given an m x n matrix board where each cell is a battleship 'X' or empty '.', return the number of the battleships on board.
+
+Battleships can only be placed horizontally or vertically on board. In other words, they can only be made of the shape 1 x k (1 row, k columns) or k x 1 (k rows, 1 column), where k can be of any size.
+At least one horizontal or vertical cell separates between two battleships (i.e., there are no adjacent battleships).
+Input: board = [["X",".",".","X"],[".",".",".","X"],[".",".",".","X"]]
+Output: 2
+
+//similar to no. of islands
+
+Dfs appraoch
+T.C- O(N2)
+S.C- O(N)--STACK 
+
+JAVA CODE-
+class Solution {
+    public int countBattleships(char[][] board) {
+        //no of islands
+        int c=0;
+        int row= board.length;
+        int col= board[0].length;
+        for(int i=0;i<row;i++){
+            for(int j=0;j<col;j++){
+           
+                //for battleship
+                if(board[i][j]=='X'){
+                    dfs(i,j,board);
+                    c++;
+                } 
+            }   
+        }
+        return c;
+    }
+    public void dfs(int i, int j, char[][] board){
+        
+        if(i<0 || i>=board.length || j<0 || j>=board[0].length || board[i][j]=='.')
+            return;
+        
+        board[i][j]='.';
+        //all scenarios
+        dfs(i+1,j,board);
+          dfs(i-1,j,board);
+          dfs(i,j+1,board);
+          dfs(i,j-1,board);
+        
+        
+    }
+}
